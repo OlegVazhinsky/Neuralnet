@@ -6,9 +6,9 @@ public class SigmoidNeuron implements Neuronable {
 
     private final double[] weights;
 
-    public SigmoidNeuron(int size) {
-        this.weights = new double[size];
-        for (int i = 0; i < size; i++) {
+    public SigmoidNeuron(int inputSize) {
+        this.weights = new double[inputSize];
+        for (int i = 0; i < inputSize; i++) {
             this.weights[i] = 1.0;
         }
     }
@@ -34,13 +34,11 @@ public class SigmoidNeuron implements Neuronable {
     }
 
     public String toString() {
-        String result = "[";
-        for (int i = 0; i < this.weights.length; i++) {
-            result += this.weights[i] + ",";
-        }
-        result.replaceFirst(".$","");
-        result += "]";
-        return result;
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < this.weights.length; i++) { result.append(this.weights[i] + ","); }
+        result.deleteCharAt(result.length() - 1);
+        result.append("]");
+        return result.toString();
     }
 
 }
