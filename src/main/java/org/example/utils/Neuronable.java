@@ -1,9 +1,11 @@
 package org.example.utils;
 
-import org.example.common.NeuronException;
+import org.example.common.NeuronInputSizeException;
+
+import java.util.List;
 
 public interface Neuronable {
-    double[] getWeights();
-    double getOutput(double[] input) throws NeuronException;
+    List<Double> getWeights();
+    double getOutput(List<Double> input) throws NeuronInputSizeException;
     String toString();
 }

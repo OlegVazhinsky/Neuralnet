@@ -2,37 +2,42 @@ package org.example.common;
 
 import org.example.utils.Neuronable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SigmoidNeuron implements Neuronable {
 
-    private double[] weights;
+    private List<Double> weights;
     private double output;
 
     public SigmoidNeuron(int inputSize) {
         this.output = 0.0;
-        this.weights = new double[inputSize];
+        this.weights = new ArrayList();
         for (int i = 0; i < inputSize; i++) {
-            this.weights[i] = 1.0;
+            this.weights.add(1.0);
         }
     }
 
     @Override
-    public double[] getWeights() {
+    public List<Double> getWeights() {
         return this.weights;
     }
 
     @Override
-    public double getOutput(double[] input) throws NeuronException {
-        if (input.length == this.weights.length) {
-            for (int i = 0; i < this.weights.length; i++) {
-                this.output += input[i] * this.weights[i];
+    public double getOutput(List<Double> input) throws NeuronInputSizeException {
+        if (input.size() == this.weights.size()) {
+            for (int i = 0; i < this.weights.size(); i++) {
+                this.output += input.get(i) * this.weights.get(i);
             }
             return 1 / (1 + Math.exp(this.output));
         } else {
-            throw new NeuronException("Neuron's input and weights' size differs. " +
-                    "Input length = " + input.length + ". " +
-                    "Weight length = " + this.weights.length);
+            throw new NeuronInputSizeException("Neuron's input and weights' size differs. " +
+                    "Input length = " + input.size() + ". " +
+                    "Weight length = " + this.weights.size());
         }
     }
+
+    public double getOutput() { return this.output; }
 
     @Override
     public String toString() {
