@@ -9,12 +9,18 @@ import java.util.List;
 public class NeuronLayer {
     private List<Neuronable> neuronList;
 
-    public NeuronLayer(int layerSize, String neuronType) {
-        if (neuronType.equals("sigmoidNeuron")) {
-            this.neuronList = new ArrayList<>();
-            for (int i = 0; i < layerSize; i++) {
-                //neuronList.add(new SigmoidNeuron());
-            }
-        }
+    public NeuronLayer() {
+        this.neuronList = new ArrayList<>();
     }
+
+    public NeuronLayer(int size) {
+        this.neuronList = new ArrayList<>(size);
+    }
+
+    public void setNeuron(int index, Neuronable neuron) {
+        this.neuronList.set(index, neuron);
+    }
+
+    public List<Neuronable> getNeuronLayer() { return this.neuronList; }
+
 }

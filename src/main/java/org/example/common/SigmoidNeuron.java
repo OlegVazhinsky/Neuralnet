@@ -42,7 +42,7 @@ public class SigmoidNeuron implements Neuronable {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Weights = [");
-        for (int i = 0; i < this.weights.length; i++) { result.append(this.weights[i] + ","); }
+        for (int i = 0; i < this.weights.size(); i++) { result.append(this.weights.get(i) + ","); }
         result.deleteCharAt(result.length() - 1);
         result.append("]. Output = " + this.output);
         return result.toString();
