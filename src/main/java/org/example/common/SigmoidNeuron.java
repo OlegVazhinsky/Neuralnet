@@ -4,9 +4,11 @@ import org.example.utils.Neuronable;
 
 public class SigmoidNeuron implements Neuronable {
 
-    private final double[] weights;
+    private double[] weights;
+    private double output;
 
     public SigmoidNeuron(int inputSize) {
+        this.output = 0.0;
         this.weights = new double[inputSize];
         for (int i = 0; i < inputSize; i++) {
             this.weights[i] = 1.0;
@@ -21,24 +23,23 @@ public class SigmoidNeuron implements Neuronable {
     @Override
     public double getOutput(double[] input) throws NeuronException {
         if (input.length == this.weights.length) {
-            double output = 0.0;
             for (int i = 0; i < this.weights.length; i++) {
-                output += input[i] * this.weights[i];
+                this.output += input[i] * this.weights[i];
             }
-            return 1 / (1 + Math.exp(output));
+            return 1 / (1 + Math.exp(this.output));
         } else {
-            throw new NeuronException("Neuron input and weights' size differs. " +
+            throw new NeuronException("Neuron's input and weights' size differs. " +
                     "Input length = " + input.length + ". " +
                     "Weight length = " + this.weights.length);
         }
     }
 
+    @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("[");
+        StringBuilder result = new StringBuilder("Weights = [");
         for (int i = 0; i < this.weights.length; i++) { result.append(this.weights[i] + ","); }
         result.deleteCharAt(result.length() - 1);
-        result.append("]");
+        result.append("]. Output = " + this.output);
         return result.toString();
     }
-
 }
